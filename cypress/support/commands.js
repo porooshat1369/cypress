@@ -24,28 +24,37 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import LoginPage from "./page-objects/login-page"
-import MainPage from "./page-objects/main-page"
+import DashboardPage from './page-objects/dashboard-page'
+import LoginPage from './page-objects/login-page'
 
 Cypress.Commands.add('login', (username, password) => {
-    cy.session(
-        [username, password],
-        () => {
-            cy.visit('/')
-            cy.get(LoginPage.usernameInput).type(username)
-            cy.get(LoginPage.passwordInput).type(password)
-            cy.get(LoginPage.loginButton).click()
-            cy.get(MainPage.cartButton).should('be.visible')            
-        }
-    )
+  cy.session([username, password], () => {
+    cy.visit('/auth/login')
+    cy.get(LoginPage.emailInput).type(username)
+    cy.get(LoginPage.passwordInput).type(password)
+    cy.get(LoginPage.loginButton).click()
+    cy.step('THEN I should login successfully')
+    cy.get(DashboardPage.userNavMenu).should('be.visible')
+  })
 
-    // cy.visit('/')
-    // cy.get('body').then(($body) => {
-    //     if ($body.find(MainPage.cartButton).length === 0) {
-    //         cy.get(LoginPage.usernameInput).should('be.visible').type(username)
-    //         cy.get(LoginPage.passwordInput).type(password)
-    //         cy.get(LoginPage.loginButton).click()
-    //     }
-    // })
-    // cy.get(MainPage.cartButton, { timeout: 10000 }).should('be.visible')
+  // cy.visit('/')
+  // cy.get('body').then(($body) => {
+  //     if ($body.find(MainPage.cartButton).length === 0) {
+  //         cy.get(LoginPage.usernameInput).should('be.visible').type(username)
+  //         cy.get(LoginPage.passwordInput).type(password)
+  //         cy.get(LoginPage.loginButton).click()
+  //     }
+  // })
+  // cy.get(MainPage.cartButton, { timeout: 10000 }).should('be.visible')
+})
+
+Cypress.Commands.add('adminLogin', (username, password) => {
+  cy.session([username, password], () => {
+    cy.visit('/auth/login')
+    cy.get(LoginPage.emailInput).type(username)
+    cy.get(LoginPage.passwordInput).type(password)
+    cy.get(LoginPage.loginButton).click()
+    cy.step('THEN I should login successfully')
+    cy.get(DashboardPage.adminLayout).should('be.visible')
+  })
 })

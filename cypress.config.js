@@ -11,8 +11,8 @@ module.exports = defineConfig({
     chromeWebSecurity: false,
     watchForFileChanges: false,
     retries: { "openMode": 0, "runMode": 1 },
-    pageLoadTimeout: 20000,
-    projectId: "fg8r6e",
+    pageLoadTimeout: 200000,
+    projectId: "pu82hs",
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
         // charts: true,
@@ -31,8 +31,8 @@ module.exports = defineConfig({
             require('cypress-mochawesome-reporter/plugin')(on);
             return config;
         },
-        baseUrl: "https://www.saucedemo.com/",
-        ApiBaseUrl: "https://jsonplaceholder.typicode.com",
+        baseUrl: "https://practicesoftwaretesting.com/",
+        ApiBaseUrl: "https://api.practicesoftwaretesting.com",
         environment: "qa",
         grepFilterSpecs: true,
         grepOmitFiltered: true,
