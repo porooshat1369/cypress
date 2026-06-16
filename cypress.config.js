@@ -31,8 +31,8 @@ module.exports = defineConfig({
             require('cypress-mochawesome-reporter/plugin')(on);
             return config;
         },
-        baseUrl: "https://practicesoftwaretesting.com/",
-        ApiBaseUrl: "https://api.practicesoftwaretesting.com",
+        baseUrl: "http://localhost:5173/",
+        ApiBaseUrl: "http://localhost:5173/",
         environment: "qa",
         grepFilterSpecs: true,
         grepOmitFiltered: true,
